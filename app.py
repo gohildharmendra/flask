@@ -1,33 +1,30 @@
 '''
-WT Form
-pip install flask-WTF
+PyMySql 1
+pip install PyMySQL
 
 '''
 
-from flask import Flask, url_for, request, render_template
-from flask_wtf import Form
-from wtforms import  TextAreaField, PasswordField, SubmitField
-from wtforms import StringField
+import pymysql
+from flask import Flask
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'db@test'
+ip='localhost'
+username='admin'
+password='admin@123'
+db_name='flask_example'
+cursorclass=pymysql.cursors.DictCursor
 
-class UserForm(Form):
-    username = StringField('Enter User name :')
-    password = PasswordField('Enter Password :')
-    submit = SubmitField("Submit")
-
-@app.route('/', methods=['GET','POST'])
+@app.route("/", methods=['GET','POST'])
 def index():
-    form = UserForm()
-    if request.method=='POST':
-        return render_template('wtform-display.html')
-    return render_template('wtform.html',form=form)
-
-
-
-
+    try:
+        # db = pymysql.connect(ip, username, password, db_name,cursorclass)
+        db = pymysql.connect(host=ip, user=username, password=password, database=db_name, cursorclass=cursorclass)
+        cur = db.cursor()        
+        return("database Exist")
+    except Exception as e:        
+        return("database Not Exist")
+    
 
 
 if __name__=='__main__':
-    app.run(debug=True, port=8080)  
+    app.run(debug=True, port=8080)
