@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jinja Templating</title>
+</head>
+<body>
+    <h1>Jinja Templating uses</h1>    
+    <h3>My name is : <strong>{{ data.name }}</strong></h3>
+    <h4>Place at : <strong>{{ data.place }}</strong></h4>
+        Skills:
+        {% for k,v in data.skills.items() %}
+        <h5>
+        {{ k,v }}
+        </h5>
+        {% endfor %}        
+        
+</body>
+</html>
